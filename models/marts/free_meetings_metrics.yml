@@ -9,6 +9,16 @@ metrics:
           fill_nulls_with: 0 
           join_to_timespine: false # Boolean that indicates if the aggregated measure should be joined to the time spine table to fill in missing dates. # Optional
 
+    - name: free_meeting_scheduled_volume
+      description: "The number of free meetings scheduled."
+      type: simple
+      label: "The number of free meetings scheduled."
+      type_params:
+        measure: 
+          name: free_meeting_scheduled
+          fill_nulls_with: 0
+          join_to_timespine: false
+
     - name: gcse_free_meeting_booked_volume
       description: "The number of GCSE free meetings booked"
       type: simple
@@ -20,3 +30,11 @@ metrics:
           join_to_timespine: false
           filter: |
             {{ Dimension('level__level_name')}} = 'GCSE'
+
+    - name: ratio_of_free_meetings_booked_and_scheduled
+      description: "The ratio of free meetings booked and scheduled."
+      type: ratio
+      label: "The ratio of free meetings booked and scheduled."
+      type_params:
+        numerator: free_meeting_booked_volume
+        denominator: free_meeting_scheduled_volume
