@@ -1,5 +1,5 @@
 semantic_models:
-  - name: subjects # A semantic model with the name subjects
+  - name: subject # A semantic model with the name subjects
     model: ref('subjects') # References the dbt model named `subjects`
     description: "A table with tutoring levels."
 

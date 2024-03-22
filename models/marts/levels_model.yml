@@ -1,5 +1,5 @@
 semantic_models:
-  - name: levels # A semantic model with the name levels
+  - name: level # A semantic model with the name levels
     model: ref('levels') # References the dbt model named `levels`
     description: "A table with tutoring levels."
 

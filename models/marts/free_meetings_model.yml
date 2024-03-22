@@ -1,5 +1,5 @@
 semantic_models:
-  - name: free_meetings # A semantic model with the name free_meetings
+  - name: free_meeting # A semantic model with the name free_meeting
     model: ref('free_meetings') # References the dbt model named `parents`
     description: "A table with tutoring levels."
 

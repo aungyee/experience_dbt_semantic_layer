@@ -1,5 +1,5 @@
 semantic_models:
-  - name: parents # A semantic model with the name parents
+  - name: parent # A semantic model with the name parents
     model: ref('parents') # References the dbt model named `parents`
     description: "A table with tutoring levels."
 
