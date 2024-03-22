@@ -22,8 +22,8 @@ source as (
         , popular as is_popular
 
         -- timestamps
-        , createdon as created_at
-        , modifiedon as modified_at
+        , convert_timezone('UTC', createdon) as created_at
+        , convert_timezone('UTC', modifiedon) as modified_at
 
     from source
 )

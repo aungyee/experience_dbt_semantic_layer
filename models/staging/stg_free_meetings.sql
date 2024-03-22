@@ -33,14 +33,14 @@ source as (
         , respondedbytutor as has_tutor_response
 
         -- timestamps
-        , starttime as starts_at
-        , endtime as ends_at
-        , createdon as created_at
-        , modifiedon as modified_at
-        , respondedbytutordate as tutor_response_sent_at
-        , smsapologysenttoparentdate as sms_apology_sent_at
-        , smsnotificationsenttoparentdate as sms_notification_sent_at
-        , techsetupsmssenttoparentdate as tech_setup_sms_sent_at
+        , convert_timezone('UTC', starttime) as starts_at
+        , convert_timezone('UTC', endtime) as ends_at
+        , convert_timezone('UTC', createdon) as created_at
+        , convert_timezone('UTC', modifiedon) as modified_at
+        , convert_timezone('UTC', respondedbytutordate) as tutor_response_sent_at
+        , convert_timezone('UTC', smsapologysenttoparentdate) as sms_apology_sent_at
+        , convert_timezone('UTC', smsnotificationsenttoparentdate) as sms_notification_sent_at
+        , convert_timezone('UTC', techsetupsmssenttoparentdate) as tech_setup_sms_sent_at
 
     from source
 )

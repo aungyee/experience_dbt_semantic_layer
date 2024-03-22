@@ -1,0 +1,18 @@
+semantic_models:
+  - name: levels # A semantic model with the name levels
+    model: ref('levels') # References the dbt model named `levels`
+    description: "A table with tutoring levels."
+
+    entities: # Entities included in the table are defined here. MetricFlow will use these columns as join keys.
+      - name: level
+        type: primary
+        expr: level_id
+
+    dimensions: # dimensions are qualitative values such as names, dates, or geographical data. They provide context to metrics and allow "metric by group" data slicing.
+      - name: is_active
+        type: categorical
+        expr: is_active
+      
+      - name: level_name
+        type: categorical
+        expr: level_name

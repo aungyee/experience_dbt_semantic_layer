@@ -1,0 +1,62 @@
+semantic_models:
+  - name: free_meetings # A semantic model with the name free_meetings
+    model: ref('free_meetings') # References the dbt model named `parents`
+    description: "A table with tutoring levels."
+
+    entities: # Entities included in the table are defined here. MetricFlow will use these columns as join keys.
+      - name: free_meeting
+        type: primary
+        expr: free_meeting_id
+      
+      - name: parent
+        type: foreign
+        expr: parent_id
+      
+      - name: level
+        type: foreign
+        expr: level_id
+      
+      - name: subject
+        type: foreign
+        expr: subject_id
+
+    dimensions: # dimensions are qualitative values such as names, dates, or geographical data. They provide context to metrics and allow "metric by group" data slicing.
+      - name: status
+        type: categorical
+        expr: status
+      
+      - name: initiated_by
+        type: categorical
+        expr: |
+          case
+            when left(initiated_by, 1) = 'P' then 'parent'
+            when left(initiated_by, 1) = 'S' then 'student'
+            when left(initiated_by, 1) = 'T' then 'tutor'
+            when left(initiated_by, 1) = 'U' then 'admin'
+            else 'unknown'
+          end
+      
+      - name: free_meeting_scheduled_date
+        type: time
+        expr: date(starts_at)
+        type_params:
+          time_granularity: day
+      
+      - name: free_meeting_booked_date
+        type: time
+        expr: date(created_at)
+        type_params:
+          time_granularity: day
+    
+    measures: # Measures are columns we perform an aggregation over. Measures are inputs to metrics.
+      - name: free_meeting_booked
+        description: "The number of lessons."
+        agg: count_distinct
+        expr: free_meeting_id
+        agg_time_dimension: free_meeting_booked_date
+      
+      - name: free_meeting_scheduled
+        description: "The number of lessons scheduled."
+        agg: count_distinct
+        expr: free_meeting_id
+        agg_time_dimension: free_meeting_scheduled_date

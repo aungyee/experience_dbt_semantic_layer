@@ -52,17 +52,17 @@ source as (
         , tutorpaid as was_tutor_paid
 
         -- timestamps
-        , createdon as created_at
-        , modifiedon as modified_at
-        , completedondate as completed_at
-        , cancelleddate as cancelled_at
-        , confirmedbytutordate as confirmed_by_tutor_at
-        , starttime as starts_at
-        , endtime as ends_at
-        , paidforondate as paid_for_at
-        , originalendtime as original_ends_at
-        , originalstarttime as original_starts_at
-        , tutorpaiddate as tutor_paid_at
+        , convert_timezone('UTC', createdon) as created_at
+        , convert_timezone('UTC', modifiedon) as modified_at
+        , convert_timezone('UTC', completedondate) as completed_at
+        , convert_timezone('UTC', cancelleddate) as cancelled_at
+        , convert_timezone('UTC', confirmedbytutordate) as confirmed_by_tutor_at
+        , convert_timezone('UTC', starttime) as starts_at
+        , convert_timezone('UTC', endtime) as ends_at
+        , convert_timezone('UTC', paidforondate) as paid_for_at
+        , convert_timezone('UTC', originalendtime) as original_ends_at
+        , convert_timezone('UTC', originalstarttime) as original_starts_at
+        , convert_timezone('UTC', tutorpaiddate) as tutor_paid_at
 
     from source
 )

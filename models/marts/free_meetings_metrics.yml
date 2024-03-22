@@ -1,0 +1,22 @@
+metrics: 
+    - name: free_meeting_booked_volume
+      description: "The number of free meetings booked."
+      type: simple
+      label: "The number of free meetings booked." # The value that will be displayed in downstream tools like LightDash
+      type_params:
+        measure: 
+          name: free_meeting_booked # The measure you are creating a proxy of.
+          fill_nulls_with: 0 
+          join_to_timespine: false # Boolean that indicates if the aggregated measure should be joined to the time spine table to fill in missing dates. # Optional
+
+    - name: gcse_free_meeting_booked_volume
+      description: "The number of GCSE free meetings booked"
+      type: simple
+      label: "The number of GCSE free meetings booked"
+      type_params:
+        measure: 
+          name: free_meeting_booked
+          fill_nulls_with: 0
+          join_to_timespine: false
+          filter: |
+            {{ Dimension('level__level_name')}} = 'GCSE'

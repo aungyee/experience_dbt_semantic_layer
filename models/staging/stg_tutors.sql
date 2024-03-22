@@ -30,8 +30,8 @@ source as (
         , date(dateofbirth) as date_of_birth
 
         -- timestamps
-        , createdon as created_at
-        , modifiedon as modified_at
+        , convert_timezone('UTC', createdon) as created_at
+        , convert_timezone('UTC', modifiedon) as modified_at
 
     from source
 )

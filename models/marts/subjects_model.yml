@@ -1,0 +1,22 @@
+semantic_models:
+  - name: subjects # A semantic model with the name subjects
+    model: ref('subjects') # References the dbt model named `subjects`
+    description: "A table with tutoring levels."
+
+    entities: # Entities included in the table are defined here. MetricFlow will use these columns as join keys.
+      - name: subject
+        type: primary
+        expr: subject_id
+
+    dimensions: # dimensions are qualitative values such as names, dates, or geographical data. They provide context to metrics and allow "metric by group" data slicing.
+      - name: is_active
+        type: categorical
+        expr: is_active
+      
+      - name: subject_name
+        type: categorical
+        expr: subject_name
+
+      - name: is_popular
+        type: categorical
+        expr: is_popular

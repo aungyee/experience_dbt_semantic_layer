@@ -1,0 +1,40 @@
+semantic_models:
+  - name: parents # A semantic model with the name parents
+    model: ref('parents') # References the dbt model named `parents`
+    description: "A table with tutoring levels."
+
+    entities: # Entities included in the table are defined here. MetricFlow will use these columns as join keys.
+      - name: parent
+        type: primary
+        expr: parent_id
+
+    dimensions: # dimensions are qualitative values such as names, dates, or geographical data. They provide context to metrics and allow "metric by group" data slicing.
+      - name: status
+        type: categorical
+        expr: status
+      
+      - name: sign_up_route
+        type: categorical
+        expr: sign_up_route
+      
+      - name: is_mature_student
+        type: categorical
+        expr: is_mature_student
+      
+      - name: sign_up_at
+        type: time
+        expr: date(created_at)
+        is_partition: True
+        type_params:
+          time_granularity: day
+
+      - name: is_student_without_parent
+        type: categorical
+        expr: case when sign_up_route = 'Student' and status = 'NOT_ACTIVATED' then true else false end
+    
+    measures: # Measures are columns we perform an aggregation over. Measures are inputs to metrics.
+      - name: parent_sign_ups
+        description: "The number of parent sign ups."
+        agg: count_distinct
+        expr: parent_id
+        agg_time_dimension: sign_up_at
