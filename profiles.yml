@@ -1,0 +1,22 @@
+config:
+  send_anonymous_usage_stats: false
+
+default:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: '{{ env_var("SNOWFLAKE_ACCOUNT") }}'
+      
+      # User/password auth
+      user: '{{ env_var("DBT_ENV_SECRET_EMAIL") }}'
+      password: '{{ env_var("DBT_ENV_SECRET_PASSWORD") }}'
+      authenticator: username_password_mfa
+
+      role: '{{ env_var("DBT_ENV_ROLE") }}'
+      database: '{{ env_var("DBT_ENV_DATABASE") }}'
+      warehouse: '{{ env_var("DBT_ENV_WAREHOUSE") }}'
+      schema: '{{ env_var("DBT_ENV_USERNAME") }}'
+      threads: 8
+      client_session_keep_alive: False
+      query_tag: dbt_dev

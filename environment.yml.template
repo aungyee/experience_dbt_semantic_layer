@@ -1,0 +1,19 @@
+name: dbt_semantic_layer
+channels:
+  - defaults
+dependencies:
+  - python==3.11
+  - pip
+  - pip:
+      - dbt-core==1.7.10
+      - dbt-snowflake==1.7.2
+      - dbt-metricflow
+variables:
+  DBT_PROFILES_DIR: ./
+  SNOWFLAKE_ACCOUNT: account
+  DBT_ENV_SECRET_EMAIL: email
+  DBT_ENV_USERNAME: <username>_SEMANTIC_LAYER_EXPERIENCE
+  DBT_ENV_SECRET_PASSWORD: password
+  DBT_ENV_DATABASE: DBT_DEV
+  DBT_ENV_WAREHOUSE: ANALYTICS_WH
+  DBT_ENV_ROLE: DBT_DEVELOPER

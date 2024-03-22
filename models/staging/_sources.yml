@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: mt_prod
+    database: mytutor
+    description: Redacted version of production MySQL database
+    freshness:
+      warn_after: {count: 12, period: hour}
+    loaded_at_field: _sdc_batched_at
+    tables:
+      - name: parents
+      - name: meet_tutor_sessions
+      - name: classbookings
+      - name: subjects
+      - name: tutoringleveltypes
+      - name: students
+      - name: tutors
