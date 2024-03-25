@@ -38,3 +38,22 @@ metrics:
       type_params:
         numerator: free_meeting_booked_volume
         denominator: free_meeting_scheduled_volume
+
+    - name: parent_free_meeting_booked_conversion_4d_window
+      description: "The number of conversion of parents booking their free meeting."
+      type: conversion
+      label: "The number of conversion of parents booking their free meeting."
+      type_params:
+        conversion_type_params:
+          base_measure:
+            name: parent_sign_ups
+            fill_nulls_with: 0
+          conversion_measure:
+            name: free_meeting_booked
+            fill_nulls_with: 0
+          entity: parent
+          calculation: conversions
+          window: 4 days
+          constant_properties:
+            - base_property: parent
+              conversion_property: parent

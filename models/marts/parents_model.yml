@@ -31,6 +31,10 @@ semantic_models:
       - name: is_student_without_parent
         type: categorical
         expr: case when sign_up_route = 'Student' and status = 'NOT_ACTIVATED' then true else false end
+      
+      - name: parent_id
+        type: categorical
+        expr: parent_id::string
     
     measures: # Measures are columns we perform an aggregation over. Measures are inputs to metrics.
       - name: parent_sign_ups
